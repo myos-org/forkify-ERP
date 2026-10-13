@@ -10,6 +10,7 @@ import com.fooderp.repository.AuditLogRepository;
 import com.fooderp.repository.BranchRepository;
 import com.fooderp.repository.UserRepository;
 import com.fooderp.service.AuditService;
+import com.fooderp.service.SetupService;
 import jakarta.validation.Valid;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ public class AdminController {
     @Autowired PasswordEncoder      passwordEncoder;
     @Autowired AuditLogRepository   auditLogRepository;
     @Autowired AuditService         auditService;
+    @Autowired SetupService         setupService;
 
     // ── GET /api/admin/users?role=&branchId= ─────────────────────────────────
     @GetMapping("/users")
@@ -182,27 +184,15 @@ public class AdminController {
     }
 
     // ── POST /api/admin/setup ─────────────────────────────────────────────────
+    // One-time bootstrap: creates the HQ branch and the first (super) admin.
     @PostMapping("/setup")
     public ResponseEntity<?> initialSetup(@RequestBody SetupRequest req) {
-        List<User> admins = userRepository.findByRole(Role.ROLE_ADMIN);
-        if (!admins.isEmpty())
-            return ResponseEntity.badRequest().body("Setup already completed. An admin already exists.");
-
-        Branch hq = new Branch();
-        hq.setName(req.getBranchName() != null ? req.getBranchName() : "HQ — Central");
-        hq.setCity(req.getCity()       != null ? req.getCity()       : "Head Office");
-        hq.setType(Branch.BranchType.HQ);
-        Branch savedBranch = branchRepository.save(hq);
-
-        User admin = new User();
-        admin.setUsername(req.getUsername());
-        admin.setEmail(req.getEmail());
-        admin.setPassword(passwordEncoder.encode(req.getPassword()));
-        admin.setFullName(req.getFullName() != null ? req.getFullName() : "Super Admin");
-        admin.setRole(Role.ROLE_ADMIN);
-        admin.setBranch(savedBranch);
-        userRepository.save(admin);
-
+        try {
+            setupService.createInitialAdmin(req.getUsername(), req.getEmail(), req.getPassword(),
+                    req.getFullName(), req.getBranchName(), req.getCity());
+        } catch (IllegalStateException | IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
         return ResponseEntity.ok("Setup complete! HQ branch and admin user created. " +
                 "You can now log in and create more branches and users via /api/admin/users.");
     }

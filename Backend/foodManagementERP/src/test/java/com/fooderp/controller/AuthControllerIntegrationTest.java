@@ -8,6 +8,7 @@ import com.fooderp.entity.Role;
 import com.fooderp.entity.User;
 import com.fooderp.repository.BranchRepository;
 import com.fooderp.repository.UserRepository;
+import com.fooderp.service.SetupService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,7 @@ public class AuthControllerIntegrationTest {
     @Autowired private UserRepository userRepo;
     @Autowired private BranchRepository branchRepo;
     @Autowired private PasswordEncoder passwordEncoder;
+    @Autowired private SetupService setupService;
     private final ObjectMapper mapper = new ObjectMapper();
 
     @BeforeEach
@@ -113,6 +115,78 @@ public class AuthControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(mapper.writeValueAsString(setupBody)))
                 .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testAdminSetupRejectsMissingPassword() throws Exception {
+        Map<String, String> setupBody = Map.of(
+                "username", "superadmin",
+                "email", "admin@klyroerp.com"
+        );
+
+        mockMvc.perform(post("/api/admin/setup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(setupBody)))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void testAdminSetupWithTakenUsernameReturnsBadRequestAndLeavesNoBranch() throws Exception {
+        User existing = new User();
+        existing.setUsername("superadmin");
+        existing.setEmail("someone@klyroerp.com");
+        existing.setPassword(passwordEncoder.encode("Password123!"));
+        existing.setRole(Role.ROLE_USER);
+        userRepo.save(existing);
+
+        Map<String, String> setupBody = Map.of(
+                "username", "superadmin",
+                "email", "admin@klyroerp.com",
+                "password", "AdminSecret123!"
+        );
+
+        mockMvc.perform(post("/api/admin/setup")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(setupBody)))
+                .andExpect(status().isBadRequest());
+
+        org.junit.jupiter.api.Assertions.assertEquals(0, branchRepo.count());
+    }
+
+    @Test
+    public void testEnsureSuperAdminCreatesAdditionalAdminWhenOneExists() {
+        setupService.createInitialAdmin("firstadmin", "first@klyroerp.com", "AdminSecret123!", null, null, null);
+
+        String result = setupService.ensureSuperAdmin("newadmin", "new@klyroerp.com", "NewSecret123!", null, false);
+
+        org.junit.jupiter.api.Assertions.assertEquals("created", result);
+        org.junit.jupiter.api.Assertions.assertEquals(2, userRepo.findByRole(Role.ROLE_ADMIN).size());
+        org.junit.jupiter.api.Assertions.assertEquals(1, branchRepo.count());
+    }
+
+    @Test
+    public void testEnsureSuperAdminResetPromotesAndReenablesExistingUser() throws Exception {
+        User locked = new User();
+        locked.setUsername("oldadmin");
+        locked.setEmail("old@klyroerp.com");
+        locked.setPassword(passwordEncoder.encode("Forgotten123!"));
+        locked.setRole(Role.ROLE_USER);
+        locked.setEnabled(false);
+        userRepo.save(locked);
+
+        org.junit.jupiter.api.Assertions.assertEquals("exists",
+                setupService.ensureSuperAdmin("oldadmin", null, "Recovered123!", null, false));
+        org.junit.jupiter.api.Assertions.assertEquals("reset",
+                setupService.ensureSuperAdmin("oldadmin", null, "Recovered123!", null, true));
+
+        LoginRequest login = new LoginRequest();
+        login.setUsername("oldadmin");
+        login.setPassword("Recovered123!");
+        mockMvc.perform(post("/api/auth/login")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(mapper.writeValueAsString(login)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.role").value("ROLE_ADMIN"));
     }
 
     @Test

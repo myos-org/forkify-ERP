@@ -284,15 +284,21 @@ The API starts on **https://forkify-erp.onrender.com**
 
 > Hibernate is set to `ddl-auto=update` — all tables are created automatically on first run.
 
-#### Create the first admin user
-```bash
-curl -X POST https://forkify-erp.onrender.com/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"username":"admin","email":"admin@forkify.com","password":"Admin@123","fullName":"Admin User"}'
+#### Create the first (super) admin
+Option A — set these env vars on the backend (e.g. Render). On startup the admin is created if that username doesn't exist yet (an HQ branch is created/reused):
+```text
+SUPERADMIN_USERNAME=admin
+SUPERADMIN_EMAIL=admin@forkify.com
+SUPERADMIN_PASSWORD=<strong-password>
 ```
-Then update the role directly in the database:
-```sql
-UPDATE users SET role = 'ROLE_ADMIN' WHERE username = 'admin';
+More super admins: log in as an admin → **User Management** → role **Super Admin**.
+Locked out of every admin account? Set `SUPERADMIN_USERNAME` to an existing user, a new `SUPERADMIN_PASSWORD` and `SUPERADMIN_RESET=true`, restart, log in, then remove `SUPERADMIN_RESET`.
+
+Option B — call the one-time setup endpoint (only works while no admin exists):
+```bash
+curl -X POST https://forkify-erp.onrender.com/api/admin/setup \
+  -H "Content-Type: application/json" \
+  -d '{"username":"admin","email":"admin@forkify.com","password":"<strong-password>","fullName":"Super Admin"}'
 ```
 
 ---

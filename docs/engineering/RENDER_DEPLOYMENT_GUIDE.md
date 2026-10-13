@@ -47,6 +47,21 @@ Use a free cloud-hosted MySQL 8 database service:
 jdbc:mysql://<HOSTNAME>:<PORT>/<DATABASE_NAME>?useSSL=true&requireSSL=true&allowPublicKeyRetrieval=true&serverTimezone=UTC
 ```
 
+#### Aiven for MySQL (free plan)
+From the Aiven console → your service → **Overview → Connection information**, set on Render:
+```text
+DB_URL=jdbc:mysql://<host>.aivencloud.com:<port>/defaultdb?sslMode=REQUIRED&serverTimezone=UTC
+DB_USERNAME=avnadmin
+DB_PASSWORD=<aiven password>
+SUPERADMIN_USERNAME=admin
+SUPERADMIN_EMAIL=admin@yourdomain.com
+SUPERADMIN_PASSWORD=<strong password>
+```
+- Note the port is **not** 3306 — use the one Aiven shows.
+- Aiven's **Allowed IP addresses** must include `0.0.0.0/0` (Render has no fixed outbound IP).
+- Tables are created automatically (`ddl-auto=update`); the super admin is created on start if that username doesn't exist, and the `SUPERADMIN_*` vars can be removed afterwards.
+- Lost admin access: set `SUPERADMIN_USERNAME` to the existing user, a new `SUPERADMIN_PASSWORD`, and `SUPERADMIN_RESET=true`; redeploy, log in, then delete `SUPERADMIN_RESET`.
+
 ---
 
 ### Option B: Deploy MySQL on Render as a Private Docker Service
