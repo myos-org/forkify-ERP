@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Package, AlertTriangle, TrendingUp, TrendingDown,
+  Package, AlertTriangle,
   RefreshCw, Download, Search, Filter, X,
 } from 'lucide-react';
 import inventoryService from '../../../services/inventoryService';
@@ -37,7 +37,6 @@ const InventoryReport = () => {
   const totalValue   = filtered.reduce((s, i) => s + parseFloat(i.totalValue || 0), 0);
   const lowCount     = filtered.filter(i => i.currentQuantity < i.minStockLevel).length;
   const goodCount    = filtered.filter(i => i.currentQuantity >= i.minStockLevel).length;
-  const criticalCount= filtered.filter(i => i.status === 'CRITICAL' || i.status === 'OUT_OF_STOCK').length;
 
   const exportCsv = () => {
     const rows = [

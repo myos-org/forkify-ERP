@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   ChefHat, Search, Plus, Edit2, Trash2, Eye, Play,
   Clock, Users, IndianRupee, Filter, Tag, Flame,
-  AlertTriangle, RefreshCw, Lock, TrendingUp,
+  AlertTriangle, RefreshCw, Lock,
 } from 'lucide-react';
 import { fetchRecipes, deleteRecipe, clearRecipeError } from '../../../store/actions/recipeActions';
 import usePermission from '../../../hooks/usePermission';

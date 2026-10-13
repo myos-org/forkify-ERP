@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import {
   Calendar, Plus, Trash2, RefreshCw, ChefHat,
   Send, TrendingUp, AlertTriangle, CheckCircle,
-  X, Search, Users, Clock, Edit3,
+  X, Search, Users, Clock,
 } from 'lucide-react';
 import mealPlanService from '../../../services/mealPlanService';
 import recipeService   from '../../../services/recipeService';

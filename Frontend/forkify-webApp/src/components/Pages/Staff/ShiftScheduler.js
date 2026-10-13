@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Clock, Plus, RefreshCw, AlertTriangle, CheckCircle,
-  ChevronLeft, ChevronRight, Users, X, Save, ChevronDown,
+  ChevronLeft, ChevronRight, X, Save, ChevronDown,
 } from 'lucide-react';
 import { shiftService } from '../../../services/newServices';
 import adminService from '../../../services/adminService';
@@ -65,7 +65,6 @@ export default function ShiftScheduler() {
   useEffect(() => { load(); }, [load]);
   useEffect(() => { if (success) { const t=setTimeout(()=>setSuccess(null),3000); return ()=>clearTimeout(t); } }, [success]);
 
-  const getShiftsForDay = (dayStr) => shifts.filter(s => s.shiftDate === dayStr);
   const getShiftsForStaffAndDay = (userId, dayStr) => shifts.filter(s => s.userId===userId && s.shiftDate===dayStr);
 
   const handleSave = async () => {

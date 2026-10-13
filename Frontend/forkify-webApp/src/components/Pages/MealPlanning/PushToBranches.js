@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Send, ArrowLeft, Store, CheckCircle, AlertTriangle,
-  RefreshCw, Calendar, ChevronDown, X, Globe,
+  RefreshCw, Calendar, ChevronDown, Globe,
 } from 'lucide-react';
 import mealPlanService from '../../../services/mealPlanService';
 import branchService   from '../../../services/branchService';

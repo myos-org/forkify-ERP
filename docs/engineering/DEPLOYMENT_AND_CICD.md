@@ -102,3 +102,9 @@ If an unexpected regression escapes staging into production:
    ```bash
    gh workflow run rollback.yml -f target_version=v2.1.0
    ```
+
+---
+
+## 6. Cloud Platform Specific Guides
+
+- **Render Deployment & Troubleshooting**: See [RENDER_DEPLOYMENT_GUIDE.md](./RENDER_DEPLOYMENT_GUIDE.md) for step-by-step setup on Render, MySQL container provisioning, external cloud MySQL configuration (Aiven/Railway), and troubleshooting JDBC/Hikari `EOFException` connection errors.

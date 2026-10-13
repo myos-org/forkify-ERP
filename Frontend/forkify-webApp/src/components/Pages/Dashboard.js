@@ -9,12 +9,6 @@ import { dashboardService } from '../../services/dashboardService';
 import usePermission from '../../hooks/usePermission';
 import useBranch     from '../../hooks/useBranch';
 
-const STATUS_COLORS = {
-  DRAFT:     '#6b7385', SENT:      '#0061d2',
-  PARTIAL:   '#856404', RECEIVED:  '#0a6640',
-  CANCELLED: '#c10000',
-};
-
 const Dashboard = () => {
   const navigate = useNavigate();
   const { isHQ }  = usePermission();

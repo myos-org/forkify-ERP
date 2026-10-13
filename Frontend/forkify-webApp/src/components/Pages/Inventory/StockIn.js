@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   ArrowDownCircle, Plus, Search, Calendar, Package,
   Truck, FileText, CheckCircle, AlertTriangle, RefreshCw,
-  Filter, X, Save, ArrowLeft,
+  X, Save, ArrowLeft,
 } from 'lucide-react';
 import inventoryService from '../../../services/inventoryService';
 import recipeService    from '../../../services/recipeService';

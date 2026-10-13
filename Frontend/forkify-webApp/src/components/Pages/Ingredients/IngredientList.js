@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   Package, Search, Plus, Edit2, Trash2, Filter,
-  AlertTriangle, RefreshCw, IndianRupee, ChevronDown,
-  X, Check, Save, Flame, TrendingUp,
+  AlertTriangle, RefreshCw, IndianRupee,
+  X, Check, Save, Flame,
 } from 'lucide-react';
 import recipeService from '../../../services/recipeService';
 import usePermission from '../../../hooks/usePermission';

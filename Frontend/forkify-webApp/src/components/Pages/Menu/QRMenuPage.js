@@ -20,9 +20,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import {
-  ShoppingCart, X, Plus, Minus, ChefHat, Clock, Leaf,
+  ShoppingCart, X, Plus, Minus,
   AlertCircle, CheckCircle, Loader, Send, Phone, User,
-  UtensilsCrossed, Info, Star, Hash,
+  UtensilsCrossed, Info, Hash,
 } from 'lucide-react';
 import menuService from '../../../services/menuService';
 

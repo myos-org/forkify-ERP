@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
   TrendingUp, AlertTriangle, CheckCircle, RefreshCw,
   Package, ArrowLeft, Download, ShoppingCart,
-  Filter, Search, X, ChevronDown,
+  Search, X, ChevronDown,
 } from 'lucide-react';
 import mealPlanService from '../../../services/mealPlanService';
 import mealPlanSvc     from '../../../services/mealPlanService';

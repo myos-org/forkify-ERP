@@ -77,7 +77,7 @@ jobs:
         run: CI=true yarn test --watchAll=false
 
       - name: Build Web Production Bundle
-        run: CI=false yarn build
+        run: yarn build
 
       - name: Archive Web Build Artifact
         uses: actions/upload-artifact@v4

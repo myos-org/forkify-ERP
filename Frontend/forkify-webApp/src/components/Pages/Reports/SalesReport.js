@@ -3,7 +3,6 @@ import {
   TrendingUp, RefreshCw, AlertTriangle, Download,
   IndianRupee, ShoppingCart, ChefHat, Calendar,
   Search, X, Filter, BarChart3, TrendingDown,
-  CheckCircle,
 } from 'lucide-react';
 import { salesService } from '../../../services/dashboardService';
 import useBranch from '../../../hooks/useBranch';

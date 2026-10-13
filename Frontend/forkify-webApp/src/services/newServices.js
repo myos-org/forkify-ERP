@@ -54,4 +54,5 @@ export const shiftService = {
   delete:        (id)                 => api.delete(`/shifts/${id}`),
 };
 
-export default { analyticsService, allergenService, recipeVersionService, customerService, transferService, shiftService };
+const services = { analyticsService, allergenService, recipeVersionService, customerService, transferService, shiftService };
+export default services;

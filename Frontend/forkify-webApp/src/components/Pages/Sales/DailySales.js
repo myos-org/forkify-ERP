@@ -26,8 +26,8 @@ function parseQRNote(notes) {
   if (!match) return null;
   return {
     orderNum: match[1],
-    table:    notes.match(/Table:([^\s\[]+)/)?.[1] || null,
-    guest:    notes.match(/Guest:([^\[]+?)(\s+\[|$)/)?.[1]?.trim() || null,
+    table:    notes.match(/Table:([^\s[]+)/)?.[1] || null,
+    guest:    notes.match(/Guest:([^[]+?)(\s+\[|$)/)?.[1]?.trim() || null,
   };
 }
 
@@ -313,10 +313,10 @@ export default function DailySales() {
   const today        = new Date().toISOString().split('T')[0];
 
   const [recipes,       setRecipes]      = useState([]);
-  const [menus,         setMenus]        = useState([]);
+  const [,              setMenus]        = useState([]);
   const [history,       setHistory]      = useState([]);
   const [customers,     setCustomers]    = useState([]);
-  const [finishedGoods, setFinishedGoods]= useState([]); // production history (for stock hint)
+  const [,              setFinishedGoods]= useState([]); // production history (for stock hint)
   const [fgStock,       setFgStock]      = useState([]); // actual FG stock levels
   const [loading,       setLoading]      = useState(false);
   const [saving,        setSaving]       = useState(false);

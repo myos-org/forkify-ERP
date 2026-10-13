@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import {
-  Package, AlertTriangle, TrendingDown, IndianRupee,
-  ShoppingCart, Trash2, BarChart3, ArrowDownCircle,
+  Package, AlertTriangle, IndianRupee,
+  ShoppingCart, Trash2, ArrowDownCircle,
   RefreshCw, Calendar, ArrowRightCircle,
 } from 'lucide-react';
 import inventoryService from '../../../services/inventoryService';

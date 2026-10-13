@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  Package, CheckCircle, Clock, RefreshCw, Plus,
-  AlertTriangle, X, Save, ChevronDown, Truck,
+  Package, CheckCircle, RefreshCw, Plus,
+  AlertTriangle, X, Save, ChevronDown,
 } from 'lucide-react';
 import procurementService from '../../../services/procurementService';
 import useBranch           from '../../../hooks/useBranch';
@@ -14,7 +14,6 @@ const STATUS_CFG = {
 };
 
 const GoodsReceived = () => {
-  const navigate         = useNavigate();
   const [searchParams]   = useSearchParams();
   const { branchId }     = useBranch();
   const poIdFromUrl      = searchParams.get('poId');

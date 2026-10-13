@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   ArrowRightLeft, Plus, RefreshCw, AlertTriangle, CheckCircle,
-  Clock, Truck, X, Save, ChevronDown, Package, Store,
+  Clock, Truck, X, ChevronDown, Package, Store,
   XCircle, Send,
 } from 'lucide-react';
 import { transferService } from '../../../services/newServices';
@@ -22,7 +22,7 @@ const emptyForm = () => ({ fromBranchId:'', toBranchId:'', notes:'', items:[{ing
 
 export default function StockTransfers() {
   const { branchId }  = useBranch();
-  const { canApprove, isHQ } = usePermission();
+  const { canApprove } = usePermission();
   const [transfers,    setTransfers]    = useState([]);
   const [branches,     setBranches]     = useState([]);
   const [ingredients,  setIngredients]  = useState([]);

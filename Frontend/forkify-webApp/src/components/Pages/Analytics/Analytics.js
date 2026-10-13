@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  TrendingUp, TrendingDown, IndianRupee, ShoppingCart,
+  TrendingUp, IndianRupee, ShoppingCart,
   BarChart3, RefreshCw, AlertTriangle, ChefHat,
-  Percent, Calendar, Filter,
+  Percent, Calendar,
 } from 'lucide-react';
 import { analyticsService } from '../../../services/newServices';
 import useBranch from '../../../hooks/useBranch';

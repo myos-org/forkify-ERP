@@ -20,7 +20,7 @@ const ActiveMenu = () => {
   const { branchId } = useBranch();
   const { isHQ } = usePermission();
 
-  const [menus,   setMenus]   = useState([]);
+  const [,        setMenus]   = useState([]);
   const [active,  setActive]  = useState(null);
   const [loading, setLoading] = useState(false);
   const [error,   setError]   = useState(null);
@@ -43,6 +43,7 @@ const ActiveMenu = () => {
     if (success) { const t = setTimeout(() => setSuccess(null), 3000); return () => clearTimeout(t); }
   }, [success]);
 
+  // eslint-disable-next-line no-unused-vars
   const handleActivate = async (id) => {
     try {
       await menuService.activate(id);

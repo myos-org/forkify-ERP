@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Trash2, AlertTriangle, Search, Calendar, Package,
-  FileText, RefreshCw, X, Save, CheckCircle,
+  RefreshCw, X, Save, CheckCircle,
   XCircle, Clock, ArrowLeft, TrendingDown, ChefHat, PackageCheck,
 } from 'lucide-react';
 import inventoryService from '../../../services/inventoryService';

@@ -4,7 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import {
   ChefHat, Clock, Users, IndianRupee, ArrowLeft,
   Edit2, Trash2, Lock, AlertTriangle, Flame, Play,
-  Tag, Package, TrendingUp, RefreshCw, CheckCircle,
+  Tag, Package, RefreshCw, CheckCircle,
   ListOrdered, Timer, GitBranch,
 } from 'lucide-react';
 import { fetchRecipeById, deleteRecipe } from '../../../store/actions/recipeActions';
@@ -21,7 +21,7 @@ const RecipeDetail = () => {
   const { id }     = useParams();
   const dispatch   = useDispatch();
   const navigate   = useNavigate();
-  const { isHQ, canEditMasterData } = usePermission();
+  const { canEditMasterData } = usePermission();
   const { selected: recipe, loading } = useSelector(s => s.recipes);
   const [servings, setServings]       = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(false);

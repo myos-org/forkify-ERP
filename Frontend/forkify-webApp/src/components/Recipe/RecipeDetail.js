@@ -77,7 +77,7 @@ function RecipeDetail({ recipe, onToggleBookmark, showRemoveOption = false }) {
   return (
     <div 
       ref={wrapperRef}
-      className="recipe-detail-wrapper"
+      className={`recipe-detail-wrapper ${hasOverflow ? 'has-overflow' : ''}`}
     >
       <div className="recipe-detail" ref={contentRef}>
         <div className="recipe-header">

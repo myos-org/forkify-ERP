@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Store, RefreshCw, AlertTriangle, TrendingUp,
+  Store, RefreshCw, AlertTriangle,
   IndianRupee, Package, Trash2, ShoppingCart, BarChart3,
-  ChevronDown, Download,
+  Download,
 } from 'lucide-react';
 import api from '../../../services/api';
 import branchService from '../../../services/branchService';

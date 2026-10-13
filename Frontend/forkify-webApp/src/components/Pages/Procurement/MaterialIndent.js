@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  ClipboardList, Plus, Trash2, Search, RefreshCw,
-  CheckCircle, XCircle, Clock, ArrowLeft, Send,
+  ClipboardList, Plus, Trash2, RefreshCw,
+  CheckCircle, XCircle, Clock, Send,
   Package, AlertTriangle, X, ChevronDown,
 } from 'lucide-react';
 import procurementService from '../../../services/procurementService';
@@ -19,7 +19,6 @@ const STATUS_CFG = {
 };
 
 const MaterialIndent = () => {
-  const navigate          = useNavigate();
   const { branchId }      = useBranch();
   const { canApprove }    = usePermission();
 
@@ -118,7 +117,6 @@ const MaterialIndent = () => {
     finally     { setSaving(false); }
   };
 
-  const ingName = (id) => ingredients.find(i => i.id === Number(id))?.name || '';
   const ingUnit = (id) => ingredients.find(i => i.id === Number(id))?.unit || '';
 
   return (

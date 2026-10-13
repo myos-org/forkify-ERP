@@ -128,8 +128,6 @@ const SeasonalMenus = () => {
     !search || m.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const recipeOptions = recipes.filter(r => !form.items.some(i => Number(i.recipeId) === r.id));
-
   return (
     <div style={{ fontFamily:"'DM Sans',sans-serif", color:'#0d1017' }}>
       <style>{`.sm-spin{animation:spin .8s linear infinite;}@keyframes spin{to{transform:rotate(360deg);}}`}</style>

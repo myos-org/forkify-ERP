@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
   Truck, Plus, Edit2, Trash2, Search, Star,
-  Phone, Mail, CheckCircle, XCircle, RefreshCw,
+  Phone, Mail, CheckCircle, RefreshCw,
   Shield, X, Save, AlertTriangle, ChevronDown,
 } from 'lucide-react';
 import procurementService from '../../../services/procurementService';

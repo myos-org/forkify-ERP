@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   Calculator, ChefHat, Clock, Users, Flame,
   TrendingUp, TrendingDown, AlertTriangle, RefreshCw,
-  IndianRupee, Apple, Droplets, Sparkles,
+  IndianRupee, Apple, Droplets,
 } from 'lucide-react';
 import { fetchRecipes } from '../../../store/actions/recipeActions';
 import recipeService from '../../../services/recipeService';

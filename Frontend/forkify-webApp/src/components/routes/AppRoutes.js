@@ -2,7 +2,6 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Login from "../Auth/Login";
-import Home from "../Pages/Home";
 import Bookmarks from "../Pages/Bookmarks";
 import AddRecipe from "../Pages/AddRecipe";
 import PrivateRoute from "../Layout/PrivateRoute";

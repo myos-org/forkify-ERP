@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Shield, RefreshCw, AlertTriangle, Download, Filter, CheckCircle, X } from 'lucide-react';
+import { Shield, RefreshCw, AlertTriangle, Download, Filter, X } from 'lucide-react';
 import { allergenService } from '../../../services/newServices';
 
 const ALLERGEN_ICONS = {
