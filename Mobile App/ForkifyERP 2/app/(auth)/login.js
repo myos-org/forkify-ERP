@@ -116,11 +116,11 @@ export default function LoginScreen() {
         <View style={LS.brand}>
           <View style={LS.logoOuter}>
             <View style={LS.logoInner}>
-              <Text style={LS.logoEmoji}>🍴</Text>
+              <Text style={LS.logoGlyph}>K</Text>
             </View>
           </View>
-          <Text style={LS.brandName}>Forkify</Text>
-          <Text style={LS.brandSub}>Restaurant Management Platform</Text>
+          <Text style={LS.brandName}>Klyro</Text>
+          <Text style={LS.brandSub}>Enterprise Management Platform</Text>
         </View>
 
         {/* Card */}
@@ -195,7 +195,7 @@ export default function LoginScreen() {
           </View>
         </View>
 
-        <Text style={LS.version}>Forkify v2.1.0</Text>
+        <Text style={LS.version}>Klyro ERP v2.1.0</Text>
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -204,9 +204,9 @@ export default function LoginScreen() {
 const LS = StyleSheet.create({
   scroll:          { alignItems: 'center', paddingHorizontal: 20 },
   brand:           { alignItems: 'center', marginBottom: 28 },
-  logoOuter:       { width: 88, height: 88, borderRadius: 44, backgroundColor: Colors.primaryLight, alignItems: 'center', justifyContent: 'center', marginBottom: 14 },
-  logoInner:       { width: 68, height: 68, borderRadius: 34, backgroundColor: Colors.primary, alignItems: 'center', justifyContent: 'center' },
-  logoEmoji:       { fontSize: 32 },
+  logoOuter:       { width: 88, height: 88, borderRadius: 28, backgroundColor: '#EAF1FF', alignItems: 'center', justifyContent: 'center', marginBottom: 14, borderWidth: 1, borderColor: '#D0D5DD' },
+  logoInner:       { width: 68, height: 68, borderRadius: 20, backgroundColor: '#101828', alignItems: 'center', justifyContent: 'center' },
+  logoGlyph:       { fontSize: 34, fontWeight: '900', color: '#60A5FA', letterSpacing: -1 },
   brandName:       { fontSize: 28, fontWeight: '800', color: Colors.text, letterSpacing: -0.5 },
   brandSub:        { fontSize: Typography.sm, color: Colors.textMuted, marginTop: 4, fontWeight: '500' },
 

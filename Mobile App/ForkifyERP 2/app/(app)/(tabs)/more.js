@@ -147,7 +147,7 @@ export default function MoreTab() {
           );
         })}
 
-        <Text style={S.version}>Forkify v2.1.0  ·  Restaurant Management System</Text>
+        <Text style={S.version}>Klyro ERP v2.1.0  ·  Enterprise Management System</Text>
       </ScrollView>
 
       {/* Branch Switcher */}
