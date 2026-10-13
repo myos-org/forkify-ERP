@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import {
-  Shield, Search, RefreshCw, Filter, X,
+  Shield, Search, RefreshCw, X,
   ChevronDown, Calendar, AlertTriangle,
 } from 'lucide-react';
 import adminService from '../../../services/adminService';
@@ -40,6 +40,7 @@ const AuditLogs = () => {
     finally  { setLoading(false); }
   }, [search, action, entityType, from, to]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { load(); }, []); // load once on mount
   // Manual search on button click
 

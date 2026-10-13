@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import {
   Package, CheckCircle, RefreshCw, Plus,
   AlertTriangle, X, Save, ChevronDown,

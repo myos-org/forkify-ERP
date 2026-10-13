@@ -49,7 +49,7 @@ const Wastage = () => {
       setRecords(wRes.data || []); setIngredients(ingRes.data || []); setFgStock(fgRes.data || []);
     } catch { setError('Failed to load wastage records'); }
     finally  { setLoading(false); }
-  }, [branchId]);
+  }, [branchId, statusFilter]);
 
   useEffect(() => { load(); }, [load, statusFilter]);
   useEffect(() => { if (!success) return; const t=setTimeout(()=>setSuccess(null),3000); return ()=>clearTimeout(t); }, [success]);

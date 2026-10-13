@@ -11,7 +11,7 @@
  * QR URL format: {origin}/menu/{menuId}?branchId={branchId}
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { QrCode, Download, ExternalLink, Copy, CheckCircle, X } from 'lucide-react';
 
 // ── Design tokens (match ERP) ───────────────────────────────────────────────

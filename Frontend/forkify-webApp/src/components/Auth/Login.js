@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChefHat, Mail, Lock, User as UserIcon, AlertCircle } from 'lucide-react';
+import { Mail, Lock, User as UserIcon, AlertCircle } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, register, clearError } from '../../store/actions/authActions';

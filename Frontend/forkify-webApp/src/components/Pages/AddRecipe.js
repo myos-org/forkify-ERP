@@ -197,13 +197,6 @@ function AddRecipe({ currentUser, onLogout, isSidebarOpen, setIsSidebarOpen }) {
       setLoading(false);
     }
   };
- const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-  const handleSearch = (e) => {
-    e.preventDefault();
-    // In add recipe page, we don't have search functionality
-  };
 
   return (
     <div className="app-container">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Search, Bell, AlertTriangle, CheckCircle, LogOut, Settings, Menu, User } from 'lucide-react';
+import { Bell, AlertTriangle, CheckCircle, LogOut, Settings, Menu, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import AICalorieAssistant from '../AI/AICalorieAssistant';
 

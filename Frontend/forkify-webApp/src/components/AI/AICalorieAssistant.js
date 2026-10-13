@@ -9,7 +9,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import {
-  Sparkles, X, Send, Zap, ChefHat, Flame,
+  Sparkles, X, Send, Zap, Flame,
   RefreshCw, CheckCircle2, Info, Bot,
 } from 'lucide-react';
 

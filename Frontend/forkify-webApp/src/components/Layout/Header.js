@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Menu, User, LogOut } from 'lucide-react';
+import { Search, Menu, User } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Header({ 

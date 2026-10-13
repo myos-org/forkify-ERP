@@ -5,9 +5,8 @@ import {
   LayoutDashboard, Package, BookOpen, Calendar, Truck, BarChart3,
   Users, ChevronRight, ChevronDown, Store, Globe,
   Utensils, ClipboardList, ShoppingCart, LogOut,
-  Flame, TrendingUp, Shield, ClipboardCheck,
-  Menu as MenuIcon, X, Heart, UserCheck, ArrowRightLeft,
-  UtensilsCrossed,
+  TrendingUp, Shield, ClipboardCheck,
+  Menu as MenuIcon, X, Heart, UserCheck,
 } from 'lucide-react';
 import usePermission from '../../hooks/usePermission';
 import branchService from '../../services/branchService';

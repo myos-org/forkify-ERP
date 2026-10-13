@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ChefHat, Home, BookmarkIcon, LogOut, User, ChevronLeft, ChevronRight, PlusCircle, X } from 'lucide-react';
+import { ChefHat, Home, BookmarkIcon, User, ChevronLeft, ChevronRight, PlusCircle, X } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function Sidebar({ currentUser, isSidebarOpen, setIsSidebarOpen }) {
@@ -25,7 +25,7 @@ function Sidebar({ currentUser, isSidebarOpen, setIsSidebarOpen }) {
 
     document.addEventListener('click', handleOutsideClick);
     return () => document.removeEventListener('click', handleOutsideClick);
-  }, [isMobile, isSidebarOpen]);
+  }, [isMobile, isSidebarOpen, setIsSidebarOpen]);
 
   // Handle escape key
   useEffect(() => {
@@ -37,7 +37,7 @@ function Sidebar({ currentUser, isSidebarOpen, setIsSidebarOpen }) {
 
     document.addEventListener('keydown', handleEscape);
     return () => document.removeEventListener('keydown', handleEscape);
-  }, [isMobile, isSidebarOpen]);
+  }, [isMobile, isSidebarOpen, setIsSidebarOpen]);
 
   return (
     <>

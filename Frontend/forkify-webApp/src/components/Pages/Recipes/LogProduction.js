@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import {
   ChefHat, Users, ArrowLeft, CheckCircle, XCircle,
@@ -31,14 +31,7 @@ const LogProduction = () => {
     }).catch(() => setError('Failed to load recipe'));
   }, [recipeId]);
 
-  // Load preview whenever servings change (debounced)
-  useEffect(() => {
-    if (!recipe || !branchId || servings < 1) return;
-    const timer = setTimeout(() => fetchPreview(), 400);
-    return () => clearTimeout(timer);
-  }, [recipe, servings, branchId]);
-
-  const fetchPreview = async () => {
+  const fetchPreview = useCallback(async () => {
     if (!branchId || !recipeId || servings < 1) return;
     setPreviewLoading(true);
     try {
@@ -49,7 +42,14 @@ const LogProduction = () => {
     } finally {
       setPreviewLoading(false);
     }
-  };
+  }, [branchId, recipeId, servings]);
+
+  // Load preview whenever servings change (debounced)
+  useEffect(() => {
+    if (!recipe || !branchId || servings < 1) return;
+    const timer = setTimeout(() => fetchPreview(), 400);
+    return () => clearTimeout(timer);
+  }, [recipe, servings, branchId, fetchPreview]);
 
   const handleSubmit = async () => {
     if (!branchId) { setError('No branch assigned'); return; }

@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
 import {
   ClipboardList, Plus, Trash2, RefreshCw,
   CheckCircle, XCircle, Clock, Send,
@@ -48,7 +47,7 @@ const MaterialIndent = () => {
       setIngredients(ingRes.data || []);
     } catch { setError('Failed to load'); }
     finally  { setLoading(false); }
-  }, [branchId]);
+  }, [branchId, statusFilter]);
 
   useEffect(() => { load(); }, [load, statusFilter]);
   useEffect(() => {

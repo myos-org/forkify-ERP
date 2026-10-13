@@ -48,7 +48,7 @@ export default function StockTransfers() {
       setIngredients(iRes.data || []);
     } catch { setError('Failed to load transfers'); }
     finally { setLoading(false); }
-  }, [branchId]);
+  }, [branchId, statusFilter]);
 
   useEffect(() => { load(); }, [load, statusFilter]);
   useEffect(() => { if (success) { const t=setTimeout(()=>setSuccess(null),3000); return ()=>clearTimeout(t); } }, [success]);

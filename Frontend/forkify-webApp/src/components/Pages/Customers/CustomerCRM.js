@@ -53,6 +53,7 @@ export default function CustomerCRM() {
         .catch(() => setBirthdays([]));
     } catch { setError('Failed to load customers'); }
     finally { setLoading(false); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [branchId]);
 
   // search triggers a separate debounced reload — avoids double-call from useCallback rebuild
