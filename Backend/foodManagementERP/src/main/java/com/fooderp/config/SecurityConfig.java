@@ -101,6 +101,7 @@ public class SecurityConfig {
 
                         // 6. Root / health check
                         .requestMatchers("/", "/test").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/health").permitAll()
 
                         // 7. Everything else requires a valid JWT
                         .anyRequest().authenticated()
