@@ -13,7 +13,7 @@ import {
   RefreshCw, CheckCircle2, Info, Bot,
 } from 'lucide-react';
 
-const API_BASE = process.env.REACT_APP_API_URL || 'https://forkify-erp.onrender.com/api';
+const API_BASE = process.env.REACT_APP_API_URL || 'https://forkify-erp-2.onrender.com/api';
 
 async function askClaude(systemPrompt, conversationHistory, branchId, contextType) {
   const token = localStorage.getItem('token') || '';
