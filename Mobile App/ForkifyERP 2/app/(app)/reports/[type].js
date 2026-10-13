@@ -24,9 +24,10 @@ const PERIODS = [
   { label: '90 Days', from: 90 },
 ];
 
-export default function ReportScreen() {
+export default function ReportScreen({ type: propType } = {}) {
   const router  = useRouter();
-  const { type } = useLocalSearchParams();
+  const params = useLocalSearchParams();
+  const type = propType || params?.type || 'inventory';
   const { branchId } = useBranch();
   const { isAdmin }  = usePermission();
 

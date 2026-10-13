@@ -248,9 +248,9 @@ export default function Home() {
       {/* ── NAV ── */}
       <nav>
         <div className="container nav-inner">
-          <a href="#" className="nav-logo">
-            <div className="nav-logo-mark">🍴</div>
-            <span className="nav-logo-text">Forkify<span>ERP</span></span>
+          <a href="#" className="nav-logo" style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <img src="/brand/klyro-symbol.svg" alt="Klyro" style={{ width: "32px", height: "32px" }} />
+            <span className="nav-logo-text">Klyro<span>ERP</span></span>
           </a>
           <ul className="nav-links">
             <li><a href="#features">Features</a></li>
@@ -273,17 +273,17 @@ export default function Home() {
             {/* Left */}
             <div>
               <div className="hero-kicker animate-fade-up">
-                <span className="hero-kicker-dot">🍴</span>
-                Restaurant Operations Platform
+                <span className="hero-kicker-dot">✨</span>
+                Modern Business Operations Platform
               </div>
               <h1 className="hero-h1 animate-fade-up delay-100">
                 Run your entire{" "}
-                <span className="gradient-text">restaurant empire</span>{" "}
+                <span className="gradient-text">business operations</span>{" "}
                 from one platform
               </h1>
               <p className="hero-sub animate-fade-up delay-200">
-                Forkify ERP brings together recipes, inventory, procurement, meal planning,
-                QR ordering and customer loyalty — built for multi-branch food businesses.
+                Klyro ERP brings together recipes, inventory, procurement, meal planning,
+                QR ordering and customer loyalty — built for multi-branch operations.
               </p>
               <div className="hero-actions animate-fade-up delay-300">
                 <a href="#cta" className="btn-primary">Start Free Trial →</a>
@@ -379,7 +379,7 @@ export default function Home() {
               All your restaurant operations<br />in one connected system
             </h2>
             <p className="section-sub animate-fade-up delay-200">
-              From kitchen to customer — Forkify ERP connects every part of your operation
+              From kitchen to customer — Klyro ERP connects every part of your operation
               so nothing falls through the cracks.
             </p>
             <div className="features-grid">
@@ -413,7 +413,7 @@ export default function Home() {
                 Up and running in four steps
               </h2>
               <p className="section-sub" style={{ margin: "0 auto" }}>
-                Forkify ERP is designed to be intuitive — most teams are fully operational within a day.
+                Klyro ERP is designed to be intuitive — most teams are fully operational within a day.
               </p>
             </div>
             <div className="steps">
@@ -585,20 +585,12 @@ export default function Home() {
         <div id="cta">
           <div className="cta-banner">
             <div className="cta-banner-title">
-              Ready to transform your restaurant operations?
+              Ready to transform your business operations?
             </div>
             <p className="cta-banner-sub">
-              Join restaurants already using Forkify ERP to cut waste, streamline procurement<br />
+              Join businesses already using Klyro ERP to cut waste, streamline procurement<br />
               and serve customers faster — from one unified platform.
             </p>
-            {/* <div className="cta-banner-actions">
-              <a href="mailto:hello@forkifyerp.com" className="btn-primary" style={{ background: "#fff", color: "var(--blue)" }}>
-                Request a Demo →
-              </a>
-              <a href="https://github.com/forkify-erp" className="btn-ghost-white" target="_blank" rel="noreferrer">
-                View on GitHub
-              </a>
-            </div> */}
           </div>
         </div>
       </main>
@@ -608,14 +600,14 @@ export default function Home() {
         <div className="container">
           <div className="footer-grid">
             <div>
-              <div className="nav-logo" style={{ marginBottom: 0 }}>
-                <div className="nav-logo-mark">🍴</div>
+              <div className="nav-logo" style={{ marginBottom: 0, display: "flex", alignItems: "center", gap: 10 }}>
+                <img src="/brand/klyro-symbol.svg" alt="Klyro" style={{ width: 28, height: 28 }} />
                 <span className="nav-logo-text" style={{ color: "#fff" }}>
-                  Forkify<span>ERP</span>
+                  Klyro<span>ERP</span>
                 </span>
               </div>
               <p className="footer-brand-text">
-                The complete restaurant operations platform. Built for multi-branch food businesses
+                The complete business operations platform. Built for multi-branch organizations
                 that want to move fast without losing control.
               </p>
             </div>
@@ -642,14 +634,14 @@ export default function Home() {
               <div className="footer-col-title">Company</div>
               <ul className="footer-col-links">
                 <li><a href="#cta">Request Demo</a></li>
-                <li><a href="mailto:hello@forkifyerp.com">Contact</a></li>
+                <li><a href="mailto:hello@klyroerp.com">Contact</a></li>
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
               </ul>
             </div>
           </div>
           <div className="footer-bottom">
-            <p>© 2025 Forkify ERP. All rights reserved.</p>
+            <p>© 2026 Klyro ERP. All rights reserved.</p>
             <div className="footer-tech-stack">
               {["Next.js", "React", "Spring Boot", "MySQL", "JWT", "Groq AI"].map((t) => (
                 <span key={t} className="footer-tech-chip">{t}</span>

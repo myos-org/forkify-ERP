@@ -1,7 +1,10 @@
 package com.fooderp.controller;
 
 import com.fooderp.entity.Recipe;
+import com.fooderp.entity.RecipeIngredient;
 import com.fooderp.entity.RecipeVersion;
+import com.fooderp.repository.IngredientRepository;
+import com.fooderp.repository.RecipeIngredientRepository;
 import com.fooderp.repository.RecipeRepository;
 import com.fooderp.repository.RecipeVersionRepository;
 import com.fooderp.repository.UserRepository;
@@ -25,9 +28,11 @@ import java.util.stream.Collectors;
 @CrossOrigin(origins = "*")
 public class RecipeVersionController {
 
-    @Autowired RecipeVersionRepository versionRepo;
-    @Autowired RecipeRepository        recipeRepo;
-    @Autowired UserRepository          userRepo;
+    @Autowired RecipeVersionRepository      versionRepo;
+    @Autowired RecipeRepository             recipeRepo;
+    @Autowired UserRepository               userRepo;
+    @Autowired IngredientRepository         ingredientRepo;
+    @Autowired RecipeIngredientRepository   riRepo;
     private final ObjectMapper mapper = new ObjectMapper();
 
     private UserDetailsImpl caller(Authentication auth) { return (UserDetailsImpl) auth.getPrincipal(); }
@@ -115,6 +120,30 @@ public class RecipeVersionController {
             if (snap.get("servings") != null) recipe.setServings(((Number) snap.get("servings")).intValue());
             if (snap.get("prepTime") != null) recipe.setPrepTime(((Number) snap.get("prepTime")).intValue());
             if (snap.get("cookTime") != null) recipe.setCookTime(((Number) snap.get("cookTime")).intValue());
+
+            if (snap.get("ingredients") != null) {
+                recipe.getIngredients().clear();
+                List<?> rawList = (List<?>) snap.get("ingredients");
+                for (Object itemObj : rawList) {
+                    if (itemObj instanceof Map) {
+                        Map<?, ?> im = (Map<?, ?>) itemObj;
+                        Long ingId = ((Number) im.get("ingredientId")).longValue();
+                        Double qty = im.get("quantity") != null ? ((Number) im.get("quantity")).doubleValue() : 0.0;
+                        String unit = (String) im.get("unit");
+                        String notes = (String) im.get("notes");
+                        ingredientRepo.findById(ingId).ifPresent(ing -> {
+                            RecipeIngredient ri = new RecipeIngredient();
+                            ri.setRecipe(recipe);
+                            ri.setIngredient(ing);
+                            ri.setQuantity(qty);
+                            ri.setUnit(unit != null ? unit : ing.getUnit());
+                            ri.setNotes(notes);
+                            recipe.getIngredients().add(ri);
+                        });
+                    }
+                }
+            }
+
             recipeRepo.save(recipe);
 
             return ResponseEntity.ok(Map.of("message", "Recipe restored to version " + version, "version", version));

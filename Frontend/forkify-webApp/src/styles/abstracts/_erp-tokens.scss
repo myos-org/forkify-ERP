@@ -1,39 +1,55 @@
-// ── ERP Design Tokens ──────────────────────────────────────────────────────
-// Shared across all ERP page components for consistent look and feel
+// ── KLYRO ERP Design Tokens ──────────────────────────────────────────────────
+// Shared across all ERP views, cards, tables, and dialogs
 
-// Primary palette
-$erp-blue:        #0061d2;
-$erp-blue-light:  #e8f0fd;
-$erp-blue-mid:    #3385e0;
-$erp-blue-dark:   #0052b3;
+// Primary brand palette
+$erp-blue:           #2563EB;   // Electric Blue
+$erp-blue-light:     #EAF1FF;   // Pale Blue Surface
+$erp-blue-mid:       #3B82F6;
+$erp-blue-dark:      #1D4ED8;   // Hover Blue
+$erp-navy:           #101828;   // Midnight Navy
 
-// Button backgrounds (visible with black text)
-$erp-btn-bg:      #e8f0fd;   // light blue - all action buttons
-$erp-btn-border:  #b3ccf5;
-$erp-btn-text:    #0052b3;   // dark blue text
+// Button backgrounds
+$erp-btn-bg:         #EAF1FF;
+$erp-btn-border:     #BFDBFE;
+$erp-btn-text:       #1D4ED8;
 
 // Card / surface
-$erp-surface:     #ffffff;
-$erp-surface-alt: #f8fafc;
-$erp-border:      #e5e7eb;
-$erp-border-mid:  #d8dde8;
+$erp-surface:        #FFFFFF;
+$erp-surface-alt:    #F8FAFC;
+$erp-border:         #E4E7EC;
+$erp-border-mid:     #D0D5DD;
 
 // Text
-$erp-text-primary:   #1f2937;
-$erp-text-secondary: #6b7280;
-$erp-text-muted:     #9ca3af;
+$erp-text-primary:   #101828;
+$erp-text-secondary: #667085;
+$erp-text-muted:     #98A2B3;
 
 // Modal
-$erp-modal-bg:       #ffffff;
-$erp-modal-header:   #f8fafc;
-$erp-modal-border:   #e5e7eb;
+$erp-modal-bg:       #FFFFFF;
+$erp-modal-header:   #F8FAFC;
+$erp-modal-border:   #E4E7EC;
 
-// Status
-$erp-success-bg:   #f0fdf4;
-$erp-success-border: #bbf7d0;
-$erp-success-text: #15803d;
-$erp-error-bg:     #fef2f2;
-$erp-error-border: #fecaca;
-$erp-error-text:   #dc2626;
-$erp-warn-bg:      rgba(251,191,36,.12);
-$erp-warn-text:    #b45309;
+// Status Tokens
+$erp-success-bg:     #F0FDF4;
+$erp-success-border: #BBF7D0;
+$erp-success-text:   #16A34A;
+$erp-error-bg:       #FEF2F2;
+$erp-error-border:   #FECACA;
+$erp-error-text:     #DC2626;
+$erp-warn-bg:        #FFFBEB;
+$erp-warn-border:    #FDE68A;
+$erp-warn-text:      #D97706;
+
+// ── Dark Theme Tokens ────────────────────────────────────────────────────────
+[data-theme='dark'],
+.dark-theme {
+  --klyro-bg:              #0B1220;
+  --klyro-sidebar-bg:      #101828;
+  --klyro-card-bg:         #182230;
+  --klyro-elevated-bg:     #1D2939;
+  --klyro-text-primary:    #F9FAFB;
+  --klyro-text-secondary:  #98A2B3;
+  --klyro-border:          #344054;
+  --klyro-accent:          #60A5FA;
+  --klyro-accent-hover:    #93C5FD;
+}

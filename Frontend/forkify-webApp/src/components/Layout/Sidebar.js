@@ -55,7 +55,7 @@ function Sidebar({ currentUser, isSidebarOpen, setIsSidebarOpen }) {
             <>
               <div className="sidebar-logo">
                 <ChefHat className="logo-icon" />
-                <h2 className="logo-text">Forkify</h2>
+                <h2 className="logo-text">Klyro</h2>
               </div>
               <button 
                 className="sidebar-toggle"

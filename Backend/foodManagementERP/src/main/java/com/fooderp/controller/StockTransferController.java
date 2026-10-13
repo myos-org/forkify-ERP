@@ -113,26 +113,34 @@ public class StockTransferController {
             if (t.getStatus() != StockTransfer.TransferStatus.APPROVED)
                 return ResponseEntity.badRequest().body((Object)"Only APPROVED transfers can be dispatched");
 
+            // Validate sufficient stock for all items before any deduction
+            for (StockTransferItem item : t.getItems()) {
+                double qty = item.getRequestedQuantity();
+                var invOpt = inventoryRepo.findByIngredientIdAndBranchId(item.getIngredient().getId(), t.getFromBranch().getId());
+                if (invOpt.isEmpty() || invOpt.get().getCurrentQuantity() < qty) {
+                    double avail = invOpt.map(InventoryItem::getCurrentQuantity).orElse(0.0);
+                    return ResponseEntity.badRequest().body((Object)("Insufficient stock for " + item.getIngredient().getName() + ": requested " + qty + ", available " + avail));
+                }
+            }
+
             // Deduct from source branch
             for (StockTransferItem item : t.getItems()) {
                 double qty = item.getRequestedQuantity();
                 item.setDispatchedQuantity(qty);
 
-                inventoryRepo.findByIngredientIdAndBranchId(item.getIngredient().getId(), t.getFromBranch().getId())
-                        .ifPresent(inv -> {
-                            inv.setCurrentQuantity(Math.max(0, inv.getCurrentQuantity() - qty));
-                            inventoryRepo.save(inv);
+                InventoryItem inv = inventoryRepo.findByIngredientIdAndBranchId(item.getIngredient().getId(), t.getFromBranch().getId()).orElseThrow();
+                inv.setCurrentQuantity(inv.getCurrentQuantity() - qty);
+                inventoryRepo.save(inv);
 
-                            StockTransaction tx = new StockTransaction();
-                            tx.setIngredient(item.getIngredient()); tx.setBranch(t.getFromBranch());
-                            tx.setType(StockTransaction.TransactionType.TRANSFER_OUT);
-                            tx.setQuantity(qty); tx.setUnitCost(item.getUnitCost());
-                            tx.setBalanceAfter(inv.getCurrentQuantity());
-                            tx.setReferenceNo(t.getTransferNumber());
-                            tx.setNotes("Transfer to " + t.getToBranch().getName());
-                            userRepo.findById(caller(auth).getId()).ifPresent(tx::setCreatedBy);
-                            txRepo.save(tx);
-                        });
+                StockTransaction tx = new StockTransaction();
+                tx.setIngredient(item.getIngredient()); tx.setBranch(t.getFromBranch());
+                tx.setType(StockTransaction.TransactionType.TRANSFER_OUT);
+                tx.setQuantity(qty); tx.setUnitCost(item.getUnitCost());
+                tx.setBalanceAfter(inv.getCurrentQuantity());
+                tx.setReferenceNo(t.getTransferNumber());
+                tx.setNotes("Transfer to " + t.getToBranch().getName());
+                userRepo.findById(caller(auth).getId()).ifPresent(tx::setCreatedBy);
+                txRepo.save(tx);
             }
             t.setStatus(StockTransfer.TransferStatus.DISPATCHED);
             t.setDispatchedAt(LocalDateTime.now());
@@ -183,10 +191,40 @@ public class StockTransferController {
     // PUT /api/transfers/{id}/cancel
     @PutMapping("/{id}/cancel")
     @PreAuthorize("hasRole('ADMIN') or hasRole('MANAGER')")
-    public ResponseEntity<?> cancel(@PathVariable Long id) {
+    @Transactional
+    public ResponseEntity<?> cancel(@PathVariable Long id, Authentication auth) {
         return transferRepo.findById(id).map(t -> {
             if (t.getStatus() == StockTransfer.TransferStatus.RECEIVED)
                 return ResponseEntity.badRequest().body((Object)"Received transfers cannot be cancelled");
+            if (t.getStatus() == StockTransfer.TransferStatus.CANCELLED)
+                return ResponseEntity.badRequest().body((Object)"Transfer is already cancelled");
+
+            // If already DISPATCHED, stock was deducted from source branch; refund it back!
+            if (t.getStatus() == StockTransfer.TransferStatus.DISPATCHED) {
+                for (StockTransferItem item : t.getItems()) {
+                    double qty = item.getDispatchedQuantity() != null ? item.getDispatchedQuantity() : item.getRequestedQuantity();
+                    InventoryItem inv = inventoryRepo.findByIngredientIdAndBranchId(item.getIngredient().getId(), t.getFromBranch().getId()).orElseGet(() -> {
+                        InventoryItem ni = new InventoryItem();
+                        ni.setIngredient(item.getIngredient()); ni.setBranch(t.getFromBranch());
+                        ni.setCurrentQuantity(0.0); ni.setMinStockLevel(0.0);
+                        return ni;
+                    });
+                    inv.setCurrentQuantity(inv.getCurrentQuantity() + qty);
+                    inventoryRepo.save(inv);
+
+                    StockTransaction tx = new StockTransaction();
+                    tx.setIngredient(item.getIngredient()); tx.setBranch(t.getFromBranch());
+                    tx.setType(StockTransaction.TransactionType.TRANSFER_IN);
+                    tx.setQuantity(qty); tx.setUnitCost(item.getUnitCost());
+                    tx.setBalanceAfter(inv.getCurrentQuantity());
+                    tx.setReferenceNo(t.getTransferNumber());
+                    tx.setNotes("Transfer cancelled: refunded to " + t.getFromBranch().getName());
+                    if (auth != null && auth.getPrincipal() instanceof UserDetailsImpl) {
+                        userRepo.findById(caller(auth).getId()).ifPresent(tx::setCreatedBy);
+                    }
+                    txRepo.save(tx);
+                }
+            }
             t.setStatus(StockTransfer.TransferStatus.CANCELLED);
             return ResponseEntity.ok((Object) toDto(transferRepo.save(t)));
         }).orElse(ResponseEntity.notFound().build());

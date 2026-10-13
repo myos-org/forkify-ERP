@@ -59,10 +59,12 @@ public class MenuService {
         Menu menu = menuRepo.findById(id)
                 .orElseThrow(() -> new RuntimeException("Menu not found: " + id));
         mapRequest(req, menu);
+        menu.getItems().clear();
         menuItemRepo.deleteAll(menuItemRepo.findByMenuIdOrderBySortOrderAsc(id));
+        menuRepo.flush();
+        saveItems(menu, req.getItems());
         Menu saved = menuRepo.save(menu);
-        saveItems(saved, req.getItems());
-        return toResponse(menuRepo.findById(saved.getId()).orElseThrow());
+        return toResponse(saved);
     }
 
     // ── Activate / deactivate ─────────────────────────────────────────────────

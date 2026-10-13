@@ -70,7 +70,7 @@ const FoodERPHeader = ({
     setShowUserMenu(false);
   }}
 >
-  Ask Forkify AI
+  Ask Klyro AI
 </button>
 
             {/* Notifications */}

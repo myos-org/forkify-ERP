@@ -88,8 +88,9 @@ public class SecurityConfig {
                         // 2. Spring Boot's /error endpoint — must be public
                         .requestMatchers("/error").permitAll()
 
-                        // 3. Auth endpoints
+                        // 3. Auth & Bootstrap endpoints
                         .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/admin/setup").permitAll()
 
                         // 4. Test endpoints
                         .requestMatchers("/api/test/**").permitAll()

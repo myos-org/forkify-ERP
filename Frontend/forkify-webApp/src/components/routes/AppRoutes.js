@@ -14,7 +14,7 @@ const AppRoutes = ({ isAuthenticated, currentUser, onLogout }) => {
   return (
     <>
       <Helmet>
-        <title>Forkify - Discover Amazing Recipes</title>
+        <title>Klyro ERP — Business Management Platform</title>
       </Helmet>
 
       <Routes>

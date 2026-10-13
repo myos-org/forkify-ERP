@@ -1,52 +1,74 @@
-// src/theme/index.js — Forkify Design Tokens v3
+// src/theme/index.js — Klyro Unified Design System Tokens
 export const Colors = {
-  // Brand
-  primary:      '#1d5fe8',
-  primaryLight: '#e8f0fe',
-  primaryDark:  '#1750cc',
-  primaryMid:   '#3b7ff5',
+  // Brand Palette — Midnight Navy & Electric Blue
+  primary:      '#2563EB', // Primary electric blue
+  primaryHover: '#1D4ED8', // Hover blue
+  primaryDark:  '#1E40AF',
+  primaryLight: '#EAF1FF', // Pale blue surface
+  primaryMid:   '#3B82F6',
 
-  // Semantic
-  success:      '#10b981',
-  successLight: '#ecfdf5',
-  successDark:  '#059669',
-  danger:       '#ef4444',
-  dangerLight:  '#fef2f2',
-  warning:      '#f59e0b',
-  warningLight: '#fffbeb',
-  info:         '#06b6d4',
-  infoLight:    '#ecfeff',
+  // Structure & Navy
+  navy:         '#101828', // Primary navy
+  navyDark:     '#0B1220', // Dark theme background
+  navyLight:    '#1D2939', // Elevated surface
 
-  // Neutrals
-  bg:           '#f5f7fb',
-  bgDark:       '#eef1f8',
-  card:         '#ffffff',
-  cardAlt:      '#fafbff',
-  border:       '#e8ecf4',
-  borderLight:  '#f0f3f9',
+  // Semantic Statuses
+  success:      '#16A34A',
+  successLight: '#DCFCE7',
+  successDark:  '#15803D',
+  danger:       '#DC2626',
+  dangerLight:  '#FEE2E2',
+  warning:      '#D97706',
+  warningLight: '#FEF3C7',
+  info:         '#2563EB',
+  infoLight:    '#EAF1FF',
 
-  // Text
-  text:         '#111827',
-  textSecondary:'#4b5563',
-  textMuted:    '#9ca3af',
-  textLight:    '#d1d5db',
+  // Light Theme Surfaces
+  bg:           '#F8FAFC', // Main background
+  bgAlt:        '#F1F5F9',
+  card:         '#FFFFFF', // Card surface
+  cardAlt:      '#F8FAFC',
+  border:       '#E4E7EC', // Border neutral
+  borderLight:  '#F2F4F7',
+
+  // Typography
+  text:         '#101828', // Primary text
+  textSecondary:'#667085', // Secondary text
+  textMuted:    '#98A2B3', // Disabled / muted text
+  textLight:    '#D0D5DD',
+
+  // Disabled States
+  disabledSurface: '#F2F4F7',
+  disabledText:    '#98A2B3',
 
   // Navigation
-  navBg:        '#0f172a',
-  navActive:    '#1d5fe8',
-  navText:      'rgba(255,255,255,0.6)',
-  navTextActive:'#ffffff',
+  navBg:        '#101828',
+  navActive:    '#2563EB',
+  navText:      'rgba(255,255,255,0.7)',
+  navTextActive:'#FFFFFF',
 
-  // Gradients (used as arrays in LinearGradient)
-  gradBlue:     ['#1d5fe8', '#3b7ff5'],
-  gradGreen:    ['#059669', '#10b981'],
-  gradDark:     ['#0f172a', '#1e293b'],
-  gradCard:     ['#ffffff', '#f8faff'],
+  // Dark Theme Tokens
+  dark: {
+    bg:         '#0B1220',
+    navBg:      '#101828',
+    card:       '#182230',
+    elevated:   '#1D2939',
+    text:       '#F9FAFB',
+    textMuted:  '#98A2B3',
+    border:     '#344054',
+    accent:     '#60A5FA',
+  },
 
-  // Status chips
-  statusDraft:      '#fef9c3', statusDraftText:   '#a16207',
-  statusActive:     '#dcfce7', statusActiveText:  '#15803d',
-  statusArchived:   '#f1f5f9', statusArchivedText:'#64748b',
+  // Gradients
+  gradBlue:     ['#2563EB', '#3B82F6'],
+  gradGreen:    ['#15803D', '#16A34A'],
+  gradDark:     ['#101828', '#1E293B'],
+  gradCard:     ['#FFFFFF', '#F8FAFC'],
+
+  // Status Chips
+  statusDraft:      '#FEF9C3', statusDraftText:   '#A16207',
+  statusActive:     '#DCFCE7', statusActiveText:  '#15803D',
+  statusArchived:   '#F1F5F9', statusArchivedText:'#64748B',
 };
 
 export const Typography = {
@@ -64,48 +86,48 @@ export const Typography = {
 export const Radius = {
   xs:   4,
   sm:   6,
-  md:   10,
-  lg:   14,
-  xl:   20,
-  xxl:  28,
+  md:   8,
+  lg:   12,
+  xl:   16,
+  xxl:  24,
   full: 999,
 };
 
 export const Shadow = {
   xs: {
-    shadowColor: '#1d5fe8',
+    shadowColor: '#101828',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.06,
+    shadowOpacity: 0.05,
     shadowRadius: 2,
     elevation: 1,
   },
   sm: {
-    shadowColor: '#94a3b8',
+    shadowColor: '#101828',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 6,
-    elevation: 3,
+    shadowOpacity: 0.06,
+    shadowRadius: 4,
+    elevation: 2,
   },
   md: {
-    shadowColor: '#64748b',
+    shadowColor: '#101828',
     shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 12,
-    elevation: 6,
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 4,
   },
   lg: {
-    shadowColor: '#1d5fe8',
+    shadowColor: '#101828',
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.14,
-    shadowRadius: 24,
-    elevation: 12,
+    shadowOpacity: 0.12,
+    shadowRadius: 16,
+    elevation: 8,
   },
   card: {
-    shadowColor: '#94a3b8',
+    shadowColor: '#101828',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.07,
-    shadowRadius: 8,
-    elevation: 3,
+    shadowOpacity: 0.05,
+    shadowRadius: 6,
+    elevation: 2,
   },
 };
 

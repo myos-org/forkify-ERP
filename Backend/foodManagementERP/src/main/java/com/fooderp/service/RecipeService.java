@@ -111,14 +111,20 @@ public class RecipeService {
         checkWriteAccess(recipe);
 
         mapRequestToEntity(req, recipe);
-        riRepo.deleteByRecipeId(id);
+        if (recipe.getIngredients() != null) {
+            recipe.getIngredients().clear();
+        }
+        if (recipe.getSteps() != null) {
+            recipe.getSteps().clear();
+        }
         Recipe saved = recipeRepo.save(recipe);
+        riRepo.deleteByRecipeId(id);
+        recipeStepRepo.deleteByRecipeId(id);
 
         // Save ingredients
         saveIngredients(saved, req.getIngredients());
 
-        // ── Replace cooking steps: wipe existing, re-save from request ────────
-        recipeStepRepo.deleteByRecipeId(id);
+        // ── Replace cooking steps: re-save from request ────────
         if (req.getSteps() != null && !req.getSteps().isEmpty()) {
             saveSteps(saved, req.getSteps());
         }
@@ -198,7 +204,8 @@ public class RecipeService {
             ri.setQuantity(ir.getQuantity() != null ? ir.getQuantity() : 0.0);
             ri.setUnit(ir.getUnit() != null ? ir.getUnit() : ing.getUnit());
             ri.setNotes(ir.getNotes());
-            riRepo.save(ri);
+            RecipeIngredient savedRi = riRepo.save(ri);
+            recipe.getIngredients().add(savedRi);
         }
     }
 

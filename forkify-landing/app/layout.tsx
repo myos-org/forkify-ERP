@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Forkify ERP — Restaurant Operations Platform",
+  title: "Klyro ERP — Business Management Platform",
   description:
-    "The complete multi-branch restaurant ERP. Recipes, inventory, procurement, meal planning, sales, QR menus and more — all in one platform.",
-  keywords: "restaurant ERP, food management, inventory, recipes, procurement, multi-branch",
+    "The complete enterprise business operations platform. Inventory, procurement, recipes, production, CRM, multi-branch analytics, and QR ordering.",
+  keywords: "business ERP, inventory, procurement, production, multi-branch, operations platform",
+  icons: {
+    icon: "/brand/klyro-favicon.svg",
+    apple: "/brand/klyro-app-icon.svg",
+  },
   openGraph: {
-    title: "Forkify ERP",
-    description: "The complete restaurant operations platform for multi-branch food businesses.",
+    title: "Klyro ERP",
+    description: "The complete enterprise operations platform for multi-branch businesses.",
     type: "website",
   },
 };

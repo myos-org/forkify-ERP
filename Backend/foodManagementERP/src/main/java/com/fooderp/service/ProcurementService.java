@@ -314,7 +314,8 @@ public class ProcurementService {
 
         Long branchId = grn.getBranch().getId();
 
-        // Auto stock-in each GRN item
+        // Auto stock-in each GRN item and track receivedQuantity on PO items
+        PurchaseOrder po = grn.getPurchaseOrder();
         for (GRNItem item : grn.getItems()) {
             InventoryDto.StockInRequest stockIn = new InventoryDto.StockInRequest();
             stockIn.setIngredientId(item.getIngredient().getId());
@@ -327,6 +328,16 @@ public class ProcurementService {
                 stockIn.setExpiryDate(item.getExpiryDate().toString());
             }
             inventoryService.stockIn(branchId, stockIn);
+
+            if (po != null && po.getItems() != null) {
+                for (POItem poi : po.getItems()) {
+                    if (poi.getIngredient().getId().equals(item.getIngredient().getId())) {
+                        double currentRec = poi.getReceivedQuantity() != null ? poi.getReceivedQuantity() : 0.0;
+                        poi.setReceivedQuantity(currentRec + item.getReceivedQuantity());
+                        break;
+                    }
+                }
+            }
         }
 
         // Mark GRN confirmed
@@ -336,11 +347,12 @@ public class ProcurementService {
         grnRepo.save(grn);
 
         // Update PO status
-        PurchaseOrder po = grn.getPurchaseOrder();
-        boolean allReceived = po.getItems().stream()
-                .allMatch(i -> i.getReceivedQuantity() >= i.getQuantity());
-        po.setStatus(allReceived ? PurchaseOrder.POStatus.RECEIVED : PurchaseOrder.POStatus.PARTIAL);
-        poRepo.save(po);
+        if (po != null) {
+            boolean allReceived = po.getItems().stream()
+                    .allMatch(i -> (i.getReceivedQuantity() != null ? i.getReceivedQuantity() : 0.0) >= i.getQuantity());
+            po.setStatus(allReceived ? PurchaseOrder.POStatus.RECEIVED : PurchaseOrder.POStatus.PARTIAL);
+            poRepo.save(po);
+        }
 
         return ProcurementDto.GRNResponse.from(grn);
     }

@@ -404,7 +404,7 @@ export default function QRMenuPage() {
           <div className="qr-header">
             <div className="qr-restaurant">
               <UtensilsCrossed size={12} style={{ marginRight: 4, verticalAlign: 'middle' }} />
-              Forkify Restaurant
+              Klyro Dining
             </div>
             {loading
               ? <div className="qr-skeleton" style={{ height: 28, width: 180, marginTop: 6 }} />

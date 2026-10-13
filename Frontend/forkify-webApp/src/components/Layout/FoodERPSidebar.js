@@ -177,16 +177,14 @@ const FoodERPSidebar = ({ isCollapsed, onToggleCollapse, onLogout }) => {
 
       {/* Brand */}
       <div className="fk-brand">
-        <div className="fk-brand-inner">
-       <div className="fk-logo-mark">
-  <UtensilsCrossed size={28} />
-</div>
+        <div className="fk-brand-inner" onClick={() => handleNav('/dashboard')} style={{ cursor: 'pointer' }}>
+          <img src="/brand/klyro-symbol.svg" alt="Klyro" className="fk-logo-mark-img" style={{ width: 32, height: 32 }} />
           <div className="fk-brand-text">
-            <div className="fk-brand-name">Forkify</div>
-            <div className="fk-brand-sub">Restaurant ERP</div>
+            <div className="fk-brand-name">Klyro</div>
+            <div className="fk-brand-sub">ERP Platform</div>
           </div>
         </div>
-        <button className="fk-collapse-btn" onClick={onToggleCollapse}>
+        <button className="fk-collapse-btn" onClick={onToggleCollapse} aria-label="Toggle navigation">
           <X size={13} />
         </button>
       </div>
@@ -332,7 +330,7 @@ const FoodERPSidebar = ({ isCollapsed, onToggleCollapse, onLogout }) => {
           </button>
         )}
         {!isCollapsed && (
-          <div className="fk-version">v2.1.0 · Forkify</div>
+          <div className="fk-version">v2.1.0 · Klyro ERP</div>
         )}
       </div>
     </aside>

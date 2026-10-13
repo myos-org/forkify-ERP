@@ -1,25 +1,25 @@
 {
-  "short_name": "Forkify",
-  "name": "Forkify",
+  "short_name": "Klyro",
+  "name": "Klyro ERP Platform",
   "icons": [
+    {
+      "src": "brand/klyro-favicon.svg",
+      "sizes": "32x32 48x48 64x64",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "brand/klyro-app-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    },
     {
       "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#0061d2",
-  "background_color": "#ffffff"
+  "theme_color": "#101828",
+  "background_color": "#F8FAFC"
 }

@@ -20,6 +20,7 @@ public class UserDetailsImpl implements UserDetails {
     private Long branchId;
     private String branchName;
     private String role;
+    private boolean enabled;
 
     @JsonIgnore
     private String password;
@@ -28,6 +29,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(Long id, String username, String email, String fullName,
                            String password, Long branchId, String branchName, String role,
+                           boolean enabled,
                            Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
@@ -37,6 +39,7 @@ public class UserDetailsImpl implements UserDetails {
         this.branchId = branchId;
         this.branchName = branchName;
         this.role = role;
+        this.enabled = enabled;
         this.authorities = authorities;
     }
 
@@ -55,6 +58,7 @@ public class UserDetailsImpl implements UserDetails {
                 branchId,
                 branchName,
                 user.getRole().name(),
+                user.isEnabled(),
                 Collections.singletonList(authority)
         );
     }
@@ -73,7 +77,7 @@ public class UserDetailsImpl implements UserDetails {
     @Override public boolean isAccountNonExpired()     { return true; }
     @Override public boolean isAccountNonLocked()      { return true; }
     @Override public boolean isCredentialsNonExpired() { return true; }
-    @Override public boolean isEnabled()               { return true; }
+    @Override public boolean isEnabled()               { return enabled; }
 
     @Override
     public boolean equals(Object o) {

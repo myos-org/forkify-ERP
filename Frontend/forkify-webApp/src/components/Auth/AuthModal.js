@@ -29,7 +29,7 @@ const AuthModal = ({ isOpen, onClose, onLogin }) => {
               {isLogin ? 'Welcome Back' : 'Create Account'}
             </h2>
             <p className="modal-subtitle">
-              {isLogin ? 'Sign in to continue to Forkify' : 'Join our community of food lovers'}
+              {isLogin ? 'Sign in to continue to Klyro' : 'Join our business management platform'}
             </p>
           </div>
 

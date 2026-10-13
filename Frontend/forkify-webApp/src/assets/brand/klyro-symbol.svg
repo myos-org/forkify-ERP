@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <!-- Klyro Geometric K Symbol -->
+  <defs>
+    <linearGradient id="klyroBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+    <linearGradient id="klyroNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B" />
+      <stop offset="100%" stop-color="#101828" />
+    </linearGradient>
+  </defs>
+
+  <!-- Left Vertical Spine -->
+  <rect x="20" y="16" width="22" height="96" rx="11" fill="url(#klyroNavyGrad)" />
+
+  <!-- Upper Diagonal Arm (Electric Blue) -->
+  <path d="M42 66 L86 24 C90 20 97 21 101 25 L103 27 C107 31 107 38 102 42 L64 78 Z" fill="url(#klyroBlueGrad)" />
+
+  <!-- Lower Diagonal Arm (Anchor Blue) -->
+  <path d="M54 62 L98 104 C102 108 102 115 98 119 L96 121 C92 125 85 125 81 121 L42 80 Z" fill="#1D4ED8" />
+
+  <!-- Center Convergence Accent -->
+  <circle cx="53" cy="71" r="7" fill="#60A5FA" opacity="0.9" />
+</svg>

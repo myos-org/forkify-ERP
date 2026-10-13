@@ -1,3 +1,7 @@
-// Redirect to dynamic report
-import { Redirect } from 'expo-router';
-export default function () { return <Redirect href="/(app)/reports/inventory" />; }
+// app/(app)/reports/inventory.js — Dedicated inventory report route
+import React from 'react';
+import ReportScreen from './[type]';
+
+export default function InventoryReportScreen() {
+  return <ReportScreen type="inventory" />;
+}

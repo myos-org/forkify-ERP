@@ -22,9 +22,9 @@ function App() {
   if (loading) {
     return (
       <div className="app-loading">
-        <Helmet><title>Loading... | Forkify</title></Helmet>
+        <Helmet><title>Loading... | Klyro ERP</title></Helmet>
         <Loader />
-        <p>Loading Forkify...</p>
+        <p>Loading Klyro ERP...</p>
       </div>
     );
   }

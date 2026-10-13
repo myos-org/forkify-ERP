@@ -127,11 +127,11 @@ function Login() {
       <div className="login-card">
         <div className="login-header">
           <div className="login-logo">
-            <ChefHat className="logo-icon" />
-            <h1 className="logo-text">Forkify</h1>
+            <img src="/brand/klyro-symbol.svg" alt="Klyro Logo" className="logo-icon-svg" style={{ width: 44, height: 44 }} />
+            <h1 className="logo-text" style={{ color: '#101828', fontWeight: 800, letterSpacing: '0.5px' }}>Klyro</h1>
           </div>
           <p className="login-subtitle">
-            {isLogin ? 'Welcome back! Sign in with your username' : 'Create your account to get started'}
+            {isLogin ? 'Welcome to Klyro ERP. Sign in to your business workspace' : 'Create your Klyro business account'}
           </p>
         </div>
 

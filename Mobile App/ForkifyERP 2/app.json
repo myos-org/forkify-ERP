@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Forkify",
-    "slug": "forkify-erp",
+    "name": "Klyro ERP",
+    "slug": "klyro-erp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#0061d2"
+      "backgroundColor": "#101828"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -22,7 +22,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#0061d2"
+        "backgroundColor": "#101828"
       },
       "package": "com.forkify.erp"
     },

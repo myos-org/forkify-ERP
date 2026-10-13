@@ -3,7 +3,7 @@
 .fk-sidebar {
   width: 256px; min-width: 256px;
   height: 100vh;
-  background: $blue;
+  background: $navy;
   display: flex; flex-direction: column;
   position: fixed; left: 0; top: 0; z-index: $z-fixed;
   transition: width $transition-slow cubic-bezier(.4,0,.2,1),
@@ -17,8 +17,8 @@
   &::after {
     content: '';
     position: absolute; top: 0; left: 0; right: 0; height: 2px;
-    background: $white;
-    opacity: .2;
+    background: $blue;
+    opacity: .8;
   }
 }
 
@@ -140,8 +140,8 @@
   min-height: 38px; outline: none;
   &:hover { background: rgba($white, .12); color: $white; }
   &.active {
-    background: $white; color: $blue;
-    .fk-nav-icon { color: $blue; }
+    background: $blue; color: $white;
+    .fk-nav-icon { color: $white; }
   }
   &.locked { opacity: .35; cursor: not-allowed; pointer-events: none; }
 }

@@ -1,0 +1,156 @@
+name: Klyro ERP — Continuous Integration & Quality Gates
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ──────────────────────────────────────────────────────────────────────────
+  # 1. BACKEND CI (Java 17 / Spring Boot 3 / Maven)
+  # ──────────────────────────────────────────────────────────────────────────
+  backend-test-and-build:
+    name: Backend — Test, Security & Package
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Backend/foodManagementERP
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Compile Backend & Test Classes
+        run: mvn compile test-compile -B
+
+      - name: Execute Automated Test Suite (JUnit 5 / Spring Test)
+        run: mvn test -B
+
+      - name: Package Executable JAR
+        run: mvn package -DskipTests -B
+
+      - name: Archive Backend Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: klyro-backend-jar
+          path: Backend/foodManagementERP/target/*.jar
+          retention-days: 7
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # 2. WEB FRONTEND CI (React 19 / CRA / AntD / Redux)
+  # ──────────────────────────────────────────────────────────────────────────
+  web-test-and-build:
+    name: Web Frontend — Test & Production Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Frontend/forkify-webApp
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: Frontend/forkify-webApp/package-lock.json
+
+      - name: Install Dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Run Web Automated Tests
+        run: CI=true npm test -- --watchAll=false
+
+      - name: Build Web Production Bundle
+        run: npm run build
+
+      - name: Archive Web Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: klyro-web-build
+          path: Frontend/forkify-webApp/build/
+          retention-days: 7
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # 3. LANDING PAGE CI (Next.js 16)
+  # ──────────────────────────────────────────────────────────────────────────
+  landing-page-build:
+    name: Landing Page — Build Verification
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forkify-landing
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: forkify-landing/package-lock.json
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build Next.js Landing Site
+        run: npm run build
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # 4. MOBILE APP CI (React Native / Expo 52)
+  # ──────────────────────────────────────────────────────────────────────────
+  mobile-checks:
+    name: Mobile App — Verification & Typecheck
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Mobile App/ForkifyERP 2
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'Mobile App/ForkifyERP 2/package-lock.json'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Verify Mobile Project Configuration
+        run: npx expo config --type public
+
+  # ──────────────────────────────────────────────────────────────────────────
+  # 5. DOCKER & CONTAINER READINESS
+  # ──────────────────────────────────────────────────────────────────────────
+  docker-validation:
+    name: Docker Infrastructure Validation
+    runs-on: ubuntu-latest
+    needs: [backend-test-and-build]
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Validate Docker Compose Configuration
+        run: docker compose config
